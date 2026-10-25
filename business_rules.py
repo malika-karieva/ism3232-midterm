@@ -48,4 +48,45 @@ def requires_proof(total: float) -> bool:
     """Returns True when the job total requires a printed proof (rule 5), otherwise False."""
     return total > PROOF_THRESHOLD
 
+def needs_overnight_run(copies: int, total: float) -> bool:
+    """Returns True when the job needs an overnight press run (rule 6), otherwise False."""
+    return copies > OVERNIGHT_COPIES_THRESHOLD or total > OVERNIGHT_TOTAL_THRESHOLD
+
+def total_invoiced(jobs: list) -> float:
+    """Returns the sum of the job totals for every job in the list. It must use a for loop that calls calculate_job_total."""
+    total = 0.0
+    for job in jobs:
+        total += calculate_job_total(job["copy_price"], job ["copies"], job ["student_org"])
+    return total
+
+def largest_job(jobs: list) -> str:
+    """Returns the title of the job with the largest job total. If two are tied for largest, it returns the one that comes first in the list. An empty list returns an empty string, "". It must use a for loop that calls calculate_job_total."""
+    if not jobs:
+        return ""
+
+    max_total = 0.0
+    largest_title = ""
+
+    for job in jobs:
+        title, copy_price, copies, student_org = job
+        total += calculate_job_total(copy_price, copies, student_org)
+        if total > max_total:
+            max_total = total
+            largest_title = title
+    return largest_title
+
+def format_job_line(title: str, total: float, proof: bool, overnight_run: bool) -> str:
+    """Returns one line of the report, such as Flyers: $40.00 | proof: no | overnight run: no. Each True/False value is shown as yes or no, and the amount always has two decimal places."""
+    proof_text = "no"
+    if proof:
+        proof_text = "yes"
+    
+    overnight_text = "no"
+    if overnight_run:
+        overnight_text = "yes"
+
+    return (
+        f"{title}: ${total:.2f} | proof: {proof_text} | overnight run:"
+        f"{overnight_text}"
+    )
 

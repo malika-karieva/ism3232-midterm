@@ -85,7 +85,6 @@ def format_job_line(title: str, total: float, proof: bool, overnight_run: bool) 
         overnight_text = "yes"
 
     return (
-        f"{title}: ${total:.2f} | proof: {proof_text} | overnight run:"
-        f"{overnight_text}"
+        f"{title}: ${total:.2f} | proof: {proof_text} | overnight run: {overnight_text}"
     )
 

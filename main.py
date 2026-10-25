@@ -1,8 +1,15 @@
-# main.py 
-# Author: Malika Karieva 
-# Brightline Print Shop 
+# main.py
+# Author: Malika Karieva
+# Brightline Print Shop
 
-from business_rules import calculate_job_total, requires_proof, needs_overnight_run, total_invoiced, largest_job, format_job_line
+from business_rules import (
+    calculate_job_total,
+    requires_proof,
+    needs_overnight_run,
+    total_invoiced,
+    largest_job,
+    format_job_line,
+)
 
 
 jobs = [
@@ -36,9 +43,7 @@ overnight_count = 0
 
 for job in jobs:
     job_count += 1
-    total = calculate_job_total(
-        job["copy_price"], job["copies"], job["student_org"]
-    )
+    total = calculate_job_total(job["copy_price"], job["copies"], job["student_org"])
     if requires_proof(total):
         proofs_count += 1
     if needs_overnight_run(job["copies"], total):
@@ -53,4 +58,3 @@ print(f"Average job total: ${average_total:.2f}")
 print(f"Largest job total: ${largest_title}")
 print(f"Proofs required: {proofs_count}")
 print(f"Overnight runs: {overnight_count}")
-

@@ -68,11 +68,10 @@ def largest_job(jobs: list) -> str:
     largest_title = ""
 
     for job in jobs:
-        title, copy_price, copies, student_org = job
-        total += calculate_job_total(copy_price, copies, student_org)
+        total = calculate_job_total(job["copy_price"], job["copies"], job["student_org"])
         if total > max_total:
             max_total = total
-            largest_title = title
+            largest_title = job["title"]
     return largest_title
 
 def format_job_line(title: str, total: float, proof: bool, overnight_run: bool) -> str:

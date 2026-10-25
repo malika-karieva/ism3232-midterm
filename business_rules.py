@@ -1,6 +1,6 @@
 # business_rules.py
 # Author: Malika Karieva
-# Brightline Print Shop
+
 
 # Business Rule Constants:
 MID_TIER_COPIES = 200
@@ -17,7 +17,7 @@ OVERNIGHT_TOTAL_THRESHOLD = 400.00
 
 # Functions:
 def calculate_print_cost(copy_price: float, copies: int) -> float:
-    """Returns the print cost before any discount (rule 1)."""
+    """Returns the cost before any discount (rule 1)."""
     return copy_price * copies
 
 
